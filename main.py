@@ -1206,10 +1206,8 @@ def add_products(combo_product):
     price = pprice_entry.get()
 
     if product and price:
-        # product_list.append(product)
-        # product_price.append(price)
+
         service.add_product(product,price)
-        combine_product.append(f"{product} - P{price}")
         update_combo_options(combo_product)
         product_entry.delete(0, tk.END)
         pprice_entry.delete(0, tk.END)
@@ -1250,8 +1248,10 @@ def add_product(add):
     product_entry.place(x=550, y=280)
     pprice_entry = tk.Entry(add, width=30)
     pprice_entry.place(x=550, y=330)
-
-    combo_product = ttk.Combobox(add, values=combine_product, width=50)
+    products = []
+    for prod in service.get_products():
+        products.append(prod.full_text())
+    combo_product = ttk.Combobox(add, values=products, width=50)
     combo_product.set("Add a product")
     combo_product.place(x=100, y=150)
 
@@ -1278,8 +1278,10 @@ def add_service(add):
     service_entry.place(x=550, y=280)
     sprice_entry = tk.Entry(add, width=30)
     sprice_entry.place(x=550, y=330)
-
-    combo_service = ttk.Combobox(add, values=combine_service, width=50)
+    services = []
+    for ser in service.get_services():
+        services.append(ser.full_text())
+    combo_service = ttk.Combobox(add, values=services, width=50)
     combo_service.set("Add a service")
     combo_service.place(x=100, y=150)
 
